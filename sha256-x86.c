@@ -6,19 +6,18 @@
 /* gcc -DTEST_MAIN -msse4.1 -msha sha256-x86.c -o sha256.exe   */
 
 /* Include the GCC super header */
-#if defined(__GNUC__)
+#if defined(__GNUC__) || defined(__clang__)
 # include <stdint.h>
 # include <x86intrin.h>
-#endif
-
-/* Microsoft supports Intel SHA ACLE extensions as of Visual Studio 2015 */
-#if defined(_MSC_VER)
+#elif defined(_MSC_VER)
 # include <immintrin.h>
 # define WIN32_LEAN_AND_MEAN
 # include <Windows.h>
 typedef UINT32 uint32_t;
 typedef UINT8 uint8_t;
 #endif
+
+#if defined (__SHA__)
 
 /* Process multiple blocks. The caller is responsible for setting the initial */
 /*  state, and the caller is responsible for padding the final block.        */
@@ -259,5 +258,7 @@ int main(int argc, char* argv[])
 
     return (success != 0 ? 0 : 1);
 }
+
+#endif
 
 #endif
