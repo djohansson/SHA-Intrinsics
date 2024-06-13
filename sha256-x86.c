@@ -17,8 +17,6 @@ typedef UINT32 uint32_t;
 typedef UINT8 uint8_t;
 #endif
 
-#if defined (__SHA__)
-
 /* Process multiple blocks. The caller is responsible for setting the initial */
 /*  state, and the caller is responsible for padding the final block.        */
 void sha256_process_x86(uint32_t state[8], const uint8_t data[], uint32_t length)
@@ -258,7 +256,5 @@ int main(int argc, char* argv[])
 
     return (success != 0 ? 0 : 1);
 }
-
-#endif
 
 #endif
