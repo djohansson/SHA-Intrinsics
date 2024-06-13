@@ -1,10 +1,24 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.5.0)
 project(SHA-Intrinsics VERSION 0.1.0 LANGUAGES C CXX)
 
 if (CMAKE_SYSTEM_PROCESSOR MATCHES "(arm)|(arm64)")
-	add_library(SHA-Intrinsics sha1-arm.c sha256-arm.c sha256.c sha512.c)
+	set(HEADER_FILES sha1-arm.h sha256-arm.h sha256.h sha512.h)
+	set(SRC_FILES sha1-arm.c sha256-arm.c sha256.c sha512.c)
+	add_library(SHA-Intrinsics ${SRC_FILES})
+	set_target_properties(SHA-Intrinsics PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "(x86)|(amd64)")
-	add_library(SHA-Intrinsics sha1-x86.c sha256-x86.c sha256.c sha512.c)
+	set(HEADER_FILES sha1-x86.h sha256-x86.h sha256.h sha512.h)
+	set(SRC_FILES sha1-x86.c sha256-x86.c sha256.c sha512.c)
+	add_library(SHA-Intrinsics ${SRC_FILES})
+	set_target_properties(SHA-Intrinsics PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 else()
-	add_library(SHA-Intrinsics sha256.c sha512.c)
+	set(HEADER_FILES sha256.h sha512.h)
+	set(SRC_FILES sha256.c sha512.c)
+	add_library(SHA-Intrinsics ${SRC_FILES})
+	set_target_properties(SHA-Intrinsics PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 endif ()
+
+install(
+	TARGETS SHA-Intrinsics
+	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
