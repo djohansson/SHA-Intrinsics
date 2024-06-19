@@ -16,9 +16,10 @@
 /* xlC -DTEST_MAIN -qarch=pwr8 -qaltivec sha512-p8.cxx -o sha512-p8.exe  */
 /* g++ -DTEST_MAIN -mcpu=power8 sha512-p8.cxx -o sha512-p8.exe           */
 
+#include "sha512-p8.h"
+
 #include <stdio.h>
 #include <string.h>
-#include <stdint.h>
 
 #if defined(__ALTIVEC__)
 # include <altivec.h>
