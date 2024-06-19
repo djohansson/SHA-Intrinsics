@@ -4,9 +4,10 @@
 /* xlc -DTEST_MAIN sha512.c -o sha512.exe           */
 /* gcc -DTEST_MAIN -std=c99 sha512.c -o sha512.exe  */
 
+#include "sha512.h"
+
 #include <stdio.h>
 #include <string.h>
-#include <stdint.h>
 
 static const uint64_t K512[] =
 {
