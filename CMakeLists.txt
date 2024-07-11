@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5.0)
 project(SHA-Intrinsics VERSION 0.1.0 LANGUAGES C CXX)
 
-if (CMAKE_SYSTEM_PROCESSOR MATCHES "(arm)|(arm64)|(ARM64)")
+if (CMAKE_SYSTEM_PROCESSOR MATCHES "(arm)|(arm64)|(ARM64)(aarch64)")
 	set(HEADER_FILES sha-intrinsics.h sha1-arm.h sha256-arm.h sha256.h sha512.h)
 	set(SRC_FILES sha1-arm.c sha256-arm.c sha256.c sha512.c)
 	add_library(SHA-Intrinsics STATIC ${SRC_FILES})
